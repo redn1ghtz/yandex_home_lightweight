@@ -10,6 +10,6 @@
  * API_USE_PROXY = true — обязательно при размещении в интернете (обход CORS)
  * OAUTH_REDIRECT_URI — если не указан, используется текущий адрес страницы
  */
-var YANDEX_OAUTH_CLIENT_ID = '5326f1996a4c4139b8abe1343a06600f';
+var YANDEX_OAUTH_CLIENT_ID = '640aac8e8e0044439f1255758e380f86';
 var API_USE_PROXY = false;
 // var OAUTH_REDIRECT_URI = 'https://ваш-домен.com/';
