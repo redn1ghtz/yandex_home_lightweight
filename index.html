@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>Дом</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="icons.css">
+</head>
+<body>
+  <div id="app">
+    <div id="authScreen">
+      <div class="auth-card">
+        <h2>Вход</h2>
+        <p class="auth-hint">Войдите через аккаунт Яндекса для доступа к умному дому.</p>
+        <a href="#" id="oauthLink" class="btn btn-primary btn-oauth">Войти через Яндекс</a>
+        <p class="auth-divider">или введите токен вручную</p>
+        <label>
+          <span>OAuth токен:</span>
+          <input type="password" id="tokenInput" placeholder="Вставьте токен сюда" autocomplete="off">
+        </label>
+        <button id="saveTokenBtn" class="btn btn-secondary">Войти по токену</button>
+      </div>
+    </div>
+
+    <div id="mainScreen" class="hidden">
+      <header class="header">
+        <h1 class="title">Дом</h1>
+        <div class="header-actions">
+          <button id="refreshBtn" class="icon-btn" title="Обновить"><span class="icon icon-refresh"></span></button>
+          <button id="settingsBtn" class="icon-btn" title="Настройки"><span class="icon icon-settings"></span></button>
+        </div>
+      </header>
+
+      <div id="loading" class="loading">Загрузка...</div>
+      <div id="content" class="hidden">
+        <div id="filters" class="filters"></div>
+        <div id="rooms" class="rooms"></div>
+      </div>
+
+      <nav class="bottom-nav">
+        <a href="#" class="nav-item active" data-tab="home">
+          <span class="nav-icon icon icon-home"></span>
+          <span class="nav-label">Мой дом</span>
+        </a>
+        <a href="#" class="nav-item" data-tab="scenarios">
+          <span class="nav-icon icon icon-scenarios"></span>
+          <span class="nav-label">Сценарии</span>
+        </a>
+      </nav>
+
+      <div id="deviceModal" class="modal hidden">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content">
+          <div class="modal-header">
+            <span class="modal-title" id="modalDeviceName"></span>
+            <button class="modal-close" id="modalClose">×</button>
+          </div>
+          <div class="modal-body" id="modalBody"></div>
+        </div>
+      </div>
+
+      <div id="cameraModal" class="modal camera-modal hidden">
+        <div class="modal-backdrop" id="cameraModalBackdrop"></div>
+        <div class="modal-content camera-modal-content">
+          <div class="modal-header">
+            <span class="modal-title" id="cameraModalTitle"></span>
+            <button class="modal-close" id="cameraModalClose">×</button>
+          </div>
+          <div class="camera-modal-body">
+            <div id="cameraLoading" class="camera-loading">Загрузка видео...</div>
+            <div id="cameraPlayOverlay" class="camera-play-overlay hidden">
+              <button id="cameraPlayBtn" class="camera-play-btn" type="button"><span class="icon icon-play"></span> Воспроизвести</button>
+            </div>
+            <video id="cameraVideo" class="camera-video" controls playsinline webkit-playsinline></video>
+            <div id="cameraError" class="camera-error hidden"></div>
+          </div>
+        </div>
+      </div>
+
+      <div id="scenariosPanel" class="panel hidden">
+        <div class="panel-header">
+          <h2>Сценарии</h2>
+          <button class="panel-close" id="scenariosClose">×</button>
+        </div>
+        <div class="panel-body" id="scenariosList"></div>
+      </div>
+
+      <div id="settingsMenu" class="dropdown hidden">
+        <button id="debugBtn" class="dropdown-item">Отладка API</button>
+        <button id="logoutBtn" class="dropdown-item">Выйти</button>
+      </div>
+
+      <div id="debugModal" class="modal hidden">
+        <div class="modal-backdrop" id="debugModalBackdrop"></div>
+        <div class="modal-content" style="max-width:95%;max-height:90%;overflow:auto">
+          <div class="modal-header">
+            <span class="modal-title">Отладка API</span>
+            <button class="modal-close" id="debugModalClose">×</button>
+          </div>
+          <div style="padding:8px;display:flex;gap:8px;flex-wrap:wrap">
+            <button id="debugCopyBtn" class="ctrl-btn">Скопировать</button>
+            <button id="debugFullBtn" class="ctrl-btn">Полный ответ</button>
+            <button id="debugStructureBtn" class="ctrl-btn">Ключи API</button>
+          </div>
+          <textarea id="debugContent" readonly style="width:100%;height:60vh;padding:12px;font-size:12px;font-family:monospace;background:#222;color:#ccc;border:none;resize:none;box-sizing:border-box"></textarea>
+        </div>
+      </div>
+
+      <div id="error" class="error hidden"></div>
+    </div>
+  </div>
+
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
